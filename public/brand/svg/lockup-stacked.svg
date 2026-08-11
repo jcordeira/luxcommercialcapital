@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 200" width="520" height="400" fill="none">
+  <defs></defs>
+  <g transform="translate(101,10) scale(1)">
+    <path d="M4 68V29C4 15.2 15.2 4 29 4C42.8 4 54 15.2 54 29V68H4Z" stroke="#2B1B3D" stroke-width="2.5"></path>
+    <path d="M20 68V31C20 26 24 22 29 22C34 22 38 26 38 31V68" stroke="#C6A664" stroke-width="2.5"></path>
+  </g>
+  <text class="word" x="132" y="136">LUX</text>
+  <line x1="98" y1="152" x2="162" y2="152" stroke="#E4DFE8" stroke-width="1"></line>
+  <text class="sub" x="132" y="174">COMMERCIAL CAPITAL</text>
+</svg>

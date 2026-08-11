@@ -1,0 +1,910 @@
+/* ==========================================================================
+   LUX Commercial Capital — design tokens and primitives
+
+   Every value here is taken literally from the design handoff. The site is
+   photo-free: type, 1px rules, whitespace and two brand colours carry it.
+   No border radius, no shadows, no gradients (except the hero scroll hairline).
+   ========================================================================== */
+
+:root {
+  /* Colour */
+  --aubergine: #2b1b3d;
+  --gold: #c6a664;
+  --ink: #0d0a10;
+  --paper: #ffffff;
+  --ink-text: #1a141f;
+  --body-grey: #5b5262;
+  --muted-grey: #8a7f92;
+  --platinum: #b8b2be;
+  --off-white: #faf9fb;
+  --rule: #e4dfe8;
+  --rule-light: #efebf2;
+  --rule-lighter: #f4f2f5;
+  --field-rule: #d8d2de;
+  --lavender-on-dark: #c9bfd3;
+  --grey-on-dark: #9a90a2;
+  --footer-link: #b9aec4;
+  --dim-on-dark: #6e6575;
+  --dark-rule-aubergine: #4a3a5c;
+  --dark-rule-ink: #241e29;
+  --jade: #0f5e52;
+
+  /* Layout */
+  --shell: 1320px;
+  --pad-x: clamp(24px, 6vw, 120px);
+  --pad-y: clamp(80px, 10vw, 160px);
+
+  /* Type */
+  --display: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --sans: var(--font-jost), 'Jost', Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--aubergine);
+  color: #fff;
+}
+
+a {
+  color: var(--aubergine);
+  text-decoration: none;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* The prototype relied on colour alone for focus, which is not sufficient.
+   Every interactive element keeps a visible ring for keyboard users. */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--aubergine);
+  color: #fff;
+  padding: 14px 22px;
+  font-size: 11.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Layout
+   -------------------------------------------------------------------------- */
+
+.section {
+  padding: var(--pad-y) var(--pad-x);
+}
+
+.section--tight {
+  padding: clamp(64px, 8vw, 120px) var(--pad-x);
+}
+
+.section--flush {
+  padding: clamp(56px, 7vw, 110px) var(--pad-x);
+}
+
+.shell {
+  max-width: var(--shell);
+  margin: 0 auto;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.on-aubergine {
+  background: var(--aubergine);
+  color: var(--paper);
+}
+
+.on-ink {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.on-off-white {
+  background: var(--off-white);
+}
+
+.rule-top {
+  border-top: 1px solid var(--rule-light);
+}
+
+.rule-bottom {
+  border-bottom: 1px solid var(--rule-light);
+}
+
+/**
+ * A 1:2 split that collapses to one column on its own.
+ *
+ * The design draws these as an auto-fit grid with `grid-column: span 2` on the
+ * wide side. That breaks below the column minimum: the span forces a second
+ * track the container has no room for, so the wide side overflows its parent
+ * by the width of the phantom column. Flex basis gives the same ratio at width
+ * and stacks cleanly when narrow, with no breakpoint.
+ */
+.split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.split > * {
+  min-width: 0;
+}
+
+.split__narrow {
+  flex: 1 1 260px;
+}
+
+.split__wide {
+  flex: 2 1 440px;
+}
+
+.split__trailing {
+  flex: 1 1 90px;
+}
+
+/* --------------------------------------------------------------------------
+   Type roles
+   -------------------------------------------------------------------------- */
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.eyebrow--wide {
+  font-size: clamp(10px, 1vw, 12px);
+  letter-spacing: 0.32em;
+}
+
+.eyebrow--tight {
+  letter-spacing: 0.28em;
+}
+
+.h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(46px, 8.4vw, 124px);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.h1--page {
+  font-size: clamp(38px, 6vw, 88px);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.h1--intake {
+  font-size: clamp(36px, 5.4vw, 76px);
+  line-height: 1.03;
+  letter-spacing: 0;
+}
+
+.h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(32px, 4.4vw, 62px);
+  line-height: 1.06;
+  color: var(--aubergine);
+  text-wrap: balance;
+}
+
+.h2--intro {
+  font-size: clamp(34px, 4.4vw, 62px);
+  line-height: 1.08;
+}
+
+.h2--md {
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1.08;
+}
+
+.h2--sm {
+  font-size: clamp(30px, 3.6vw, 50px);
+  line-height: 1.1;
+}
+
+.h2--split {
+  font-size: clamp(32px, 4.2vw, 58px);
+  line-height: 1.07;
+}
+
+.h2--cta {
+  font-size: clamp(36px, 5.6vw, 82px);
+  line-height: 1.02;
+  max-width: 22ch;
+}
+
+.subhead {
+  font-family: var(--display);
+  font-size: clamp(26px, 3vw, 40px);
+  line-height: 1.14;
+  color: var(--aubergine);
+}
+
+.subhead--family {
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.1;
+}
+
+.lead {
+  margin: 0;
+  font-size: clamp(16px, 1.5vw, 21px);
+  line-height: 1.62;
+  font-weight: 300;
+  text-wrap: pretty;
+}
+
+.lead--banner {
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 1.72;
+  color: var(--lavender-on-dark);
+}
+
+.body {
+  margin: 0;
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.75;
+  color: var(--body-grey);
+  font-weight: 300;
+  text-wrap: pretty;
+}
+
+.body--emphasis {
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.7;
+  color: var(--ink-text);
+}
+
+.body--card {
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+
+.body--row {
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.pullquote {
+  margin: 0;
+  padding-left: 22px;
+  border-left: 1px solid var(--gold);
+  font-family: var(--display);
+  font-size: clamp(22px, 2.2vw, 30px);
+  line-height: 1.4;
+  color: var(--aubergine);
+}
+
+.pullquote--dark {
+  padding-left: 20px;
+  font-family: var(--sans);
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.7;
+  color: var(--paper);
+  font-weight: 300;
+}
+
+.step-label {
+  font-size: 12px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.meta-label {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--body-grey);
+}
+
+.placeholder-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--grey-on-dark);
+}
+
+.placeholder-value {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--platinum);
+}
+
+.measure-hero {
+  max-width: 15ch;
+}
+
+.measure-lead {
+  max-width: 60ch;
+}
+
+.measure-body {
+  max-width: 56ch;
+}
+
+.measure-wide {
+  max-width: 64ch;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons and links
+   -------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-block;
+  font-size: 11.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 19px 34px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.btn--gold {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: var(--gold);
+}
+
+.btn--gold:hover {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
+}
+
+.btn--gold-to-aubergine:hover {
+  background: var(--aubergine);
+  border-color: var(--aubergine);
+  color: var(--paper);
+}
+
+.btn--aubergine {
+  background: var(--aubergine);
+  color: var(--paper);
+  border-color: var(--aubergine);
+}
+
+.btn--aubergine:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--paper);
+  border-color: var(--dark-rule-aubergine);
+}
+
+.btn--outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.btn--submit {
+  align-self: flex-start;
+  padding: 19px 38px;
+}
+
+/* Text link with a gold hairline under it. */
+.rule-link {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--aubergine);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 6px;
+  transition: color 0.18s ease;
+}
+
+.rule-link:hover {
+  color: var(--gold);
+}
+
+.rule-link--on-dark {
+  color: var(--paper);
+  border-bottom-color: var(--dark-rule-aubergine);
+  padding: 8px 2px;
+  font-size: 11.5px;
+}
+
+.rule-link--on-dark:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* --------------------------------------------------------------------------
+   Cell grids
+
+   Rules are drawn per cell (border-right + border-bottom on the cell,
+   border-top + border-left on the container). A filled container behind gaps
+   strands grey blocks when the item count does not fill the last row.
+   -------------------------------------------------------------------------- */
+
+.cell-grid {
+  display: grid;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+
+.cell-grid > * {
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.cell-grid--cards {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+
+.cell-grid--types {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+}
+
+.cell-grid--sources {
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.cell-grid--concepts {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+
+/* --------------------------------------------------------------------------
+   Forms
+   -------------------------------------------------------------------------- */
+
+.form-panel {
+  border: 1px solid var(--rule);
+  padding: clamp(28px, 4vw, 52px);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.field-label {
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--body-grey);
+}
+
+.field-input,
+.field-select {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--field-rule);
+  background: transparent;
+  padding: 10px 0;
+  font-size: 15px;
+  color: var(--ink);
+  outline: none;
+  border-radius: 0;
+  transition: border-color 0.18s ease;
+}
+
+.field-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--body-grey) 50%),
+    linear-gradient(135deg, var(--body-grey) 50%, transparent 50%);
+  background-position: calc(100% - 9px) calc(50% + 1px), calc(100% - 4px) calc(50% + 1px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 22px;
+}
+
+.field-textarea {
+  width: 100%;
+  border: 1px solid var(--field-rule);
+  background: transparent;
+  padding: 14px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  outline: none;
+  resize: vertical;
+  border-radius: 0;
+  transition: border-color 0.18s ease;
+}
+
+.field-input:focus,
+.field-select:focus {
+  border-bottom-color: var(--gold);
+}
+
+.field-textarea:focus {
+  border-color: var(--gold);
+}
+
+.field-input::placeholder,
+.field-textarea::placeholder {
+  color: var(--platinum);
+}
+
+.field-input[aria-invalid='true'],
+.field-select[aria-invalid='true'] {
+  border-bottom-color: #9a3b3b;
+}
+
+.field-textarea[aria-invalid='true'] {
+  border-color: #9a3b3b;
+}
+
+.field-error {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: #9a3b3b;
+}
+
+.field-row {
+  display: grid;
+  gap: 22px;
+}
+
+.field-row--4 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+
+.field-row--3 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+}
+
+.upload-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  border: 1px dashed var(--field-rule);
+  padding: 20px 22px;
+}
+
+.upload-trigger {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--aubergine);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 5px;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.upload-trigger:hover {
+  color: var(--gold);
+}
+
+/* Selectable chips — checkboxes wearing the design's bordered chip. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--rule);
+  padding: 15px 20px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-text);
+  cursor: pointer;
+  transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease;
+}
+
+.chip:hover {
+  border-color: var(--gold);
+  color: var(--aubergine);
+}
+
+.chip input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.chip:has(input:checked) {
+  background: var(--aubergine);
+  border-color: var(--aubergine);
+  color: var(--paper);
+}
+
+.chip:has(input:focus-visible) {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.form-success {
+  font-size: 14px;
+  color: var(--jade);
+  letter-spacing: 0.04em;
+}
+
+.form-failure {
+  font-size: 14px;
+  color: #9a3b3b;
+  letter-spacing: 0.04em;
+}
+
+/* --------------------------------------------------------------------------
+   Header
+
+   Single breakpoint at 1040px. Everything else on the site is fluid.
+   -------------------------------------------------------------------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.site-header__bar {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 18px clamp(20px, 4vw, 56px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.site-header__nav {
+  display: none;
+  align-items: center;
+  gap: clamp(16px, 2.2vw, 34px);
+}
+
+.site-header__link {
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-text);
+  white-space: nowrap;
+  transition: color 0.18s ease;
+}
+
+.site-header__link:hover,
+.site-header__link[aria-current='page'] {
+  color: var(--gold);
+}
+
+.site-header__cta {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--aubergine);
+  border: 1px solid var(--aubergine);
+  padding: 13px 22px;
+  white-space: nowrap;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.site-header__cta:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.site-header__compact {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.site-header__cta--compact {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  padding: 12px 16px;
+}
+
+.site-header__toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.site-header__toggle span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--aubergine);
+}
+
+.site-header__drawer {
+  border-top: 1px solid var(--rule-light);
+  background: var(--paper);
+  padding: 8px clamp(20px, 4vw, 56px) 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header__drawer a {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-text);
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-lighter);
+}
+
+.site-header__drawer a:last-child {
+  color: var(--gold);
+  border-bottom: none;
+}
+
+@media (min-width: 1040px) {
+  .site-header__nav {
+    display: flex;
+  }
+
+  .site-header__compact,
+  .site-header__drawer {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(56px, 7vw, 100px) var(--pad-x) 40px;
+}
+
+.site-footer__columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: clamp(32px, 4vw, 64px);
+}
+
+.site-footer__heading {
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.site-footer__link {
+  font-size: 14px;
+  color: var(--footer-link);
+  font-weight: 300;
+  transition: color 0.18s ease;
+}
+
+.site-footer__link:hover {
+  color: var(--paper);
+}
+
+.site-footer__bottom {
+  border-top: 1px solid var(--dark-rule-ink);
+  padding-top: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   Hero scroll indicator — the only animation in the design.
+   -------------------------------------------------------------------------- */
+
+@keyframes luxDrop {
+  0% {
+    transform: translateY(0);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0.15;
+  }
+}
+
+.scroll-hairline {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(var(--gold), rgba(198, 166, 100, 0));
+  animation: luxDrop 2.6s ease-in-out infinite;
+}

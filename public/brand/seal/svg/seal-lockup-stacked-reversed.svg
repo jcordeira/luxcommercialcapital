@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 260" width="680" height="520" fill="none">
+  <defs></defs>
+  <circle cx="170" cy="66" r="52" fill="none" stroke="#C6A664" stroke-width="1.5"></circle>
+  <text class="lc" x="170.6" y="81.4" style="font-size:44px">LC</text>
+  <text class="word" x="172" y="176">LUX COMMERCIAL</text>
+  <line x1="52" y1="196" x2="288" y2="196" stroke="#3A3341" stroke-width="1"></line>
+  <text class="sub" x="173" y="220">CAPITAL ADVISORY</text>
+</svg>
