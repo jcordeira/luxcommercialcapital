@@ -69,18 +69,53 @@ will show you the records it wants. Then in Porkbun, open the domain → **DNS**
 Porkbun supports `ALIAS` at the root, which is what you want — do not use an `A` record with a
 hard-coded IP.
 
-3. Back in Netlify, wait for the domain to verify (usually minutes, up to a few hours) and confirm
-   **HTTPS** shows a provisioned Let's Encrypt certificate. Set `luxcommercialcapital.com` as the
+3. **Add the domain in Netlify as well.** DNS alone is not enough: Netlify's apex load balancer
+   routes by hostname, so until `luxcommercialcapital.com` is registered against this project it
+   answers with a 404 and the default `*.netlify.app` certificate. Go to **Domain management** →
+   **Add a domain**, enter `luxcommercialcapital.com`, and add `www.luxcommercialcapital.com` too.
+4. Wait for the domain to verify (usually minutes, up to a few hours) and confirm **HTTPS** shows a
+   provisioned Let's Encrypt certificate covering both names. Set `luxcommercialcapital.com` as the
    primary domain so `www` redirects to it.
+
+To check from the outside: `https://luxcommercialcapital.com` should return the site, not a 404,
+and the certificate should name the domain rather than `*.netlify.app`.
 
 ## Form submissions — set this up or you will not see leads
 
-Both forms post to Netlify Forms. Netlify detects them from the deployed HTML on the first build,
-so they appear under **Forms** in the site dashboard as `transaction` and `deal-intake`.
+Both forms post to Netlify Forms. This takes **three** steps, in order, and the first one is easy
+to miss.
 
-**Turn on notifications**: Netlify dashboard → **Forms** → **Form notifications** → **Add
-notification** → **Email notification** → send to `contact@luxcommercialcapital.com`. Do this for
-both forms. Without it, submissions pile up in the dashboard silently.
+### 1. Turn on form detection
+
+Netlify does **not** scan for forms by default — this is opt-in per project, and until it is on,
+the Forms page shows an "Enable form detection" button instead of your forms.
+
+Go to <https://app.netlify.com/projects/luxcommercialcapital/forms> and select
+**Enable form detection**.
+
+### 2. Redeploy
+
+Detection happens at build time, by parsing the HTML Netlify publishes. Turning it on does not
+retroactively scan the deploy you already have — you have to build again.
+
+**Deploys** → **Trigger deploy** → **Deploy site**.
+
+When that build finishes, `transaction` and `deal-intake` appear on the Forms page. If they don't,
+the forms were not found and nothing below will work — stop and check that.
+
+### 3. Add the email notification
+
+Go to **Project configuration** → **Notifications** → **Emails and webhooks** → **Form submission
+notifications** → **Add notification** → **Email notification**, and send to
+`contact@luxcommercialcapital.com`. Direct link:
+
+<https://app.netlify.com/projects/luxcommercialcapital/configuration/notifications#form-submission-notifications>
+
+You can point one notification at a specific form or at every verified submission on the project.
+One catch-all covers both forms. Without this, submissions land in the dashboard silently and
+nobody is told.
+
+Then send a real test submission through both forms and confirm the email arrives.
 
 Notes:
 
