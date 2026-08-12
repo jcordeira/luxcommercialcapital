@@ -117,6 +117,25 @@ nobody is told.
 
 Then send a real test submission through both forms and confirm the email arrives.
 
+### 4. Make sure the recipient can actually receive mail
+
+`contact@luxcommercialcapital.com` is **not a mailbox** — the domain's MX points at
+`fwd2.porkbun.com`, which is Porkbun's forwarding service. Mail only reaches a human if a
+forwarding rule exists in Porkbun (**domain → Email**) mapping `contact@` to a real inbox. A
+correctly configured notification will still appear to vanish if that rule is missing.
+
+Porkbun's forwarding normally installs two MX records — `fwd1.porkbun.com` at priority 10 and
+`fwd2.porkbun.com` at priority 20. Only `fwd2` is present, so `fwd1` was lost when the parking
+records were cleared for Netlify. Re-add it.
+
+If a submission is stored in the Netlify dashboard but no email arrives, bisect it: temporarily
+point the notification at a mailbox you know works (`Joseph@teamcordeira.com`, a real Google
+Workspace account). Mail arriving there means Netlify is fine and the fault is Porkbun forwarding;
+mail not arriving means the notification was never saved.
+
+The domain also has **no SPF and no DMARC record**. That does not affect receiving, but anything
+sent as `@luxcommercialcapital.com` will likely be filtered as spam until they are added.
+
 Notes:
 
 - The free tier covers **100 submissions per month** and 10MB of uploads. Watch this as traffic
