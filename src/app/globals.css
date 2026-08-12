@@ -884,6 +884,78 @@ button {
 }
 
 /* --------------------------------------------------------------------------
+   Long-form article body
+
+   A single measure, generous leading, headings in Cormorant. Same rules and
+   colours as the rest of the site — nothing new is introduced here.
+   -------------------------------------------------------------------------- */
+
+.article-body {
+  max-width: 72ch;
+}
+
+.article-p {
+  margin: 0 0 26px;
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.78;
+  color: var(--ink-text);
+  font-weight: 300;
+  text-wrap: pretty;
+}
+
+.article-h2 {
+  margin: clamp(40px, 5vw, 64px) 0 22px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(24px, 2.6vw, 34px);
+  line-height: 1.2;
+  color: var(--aubergine);
+  text-wrap: balance;
+}
+
+.article-body > .article-h2:first-child {
+  margin-top: 0;
+}
+
+.article-quote {
+  margin: clamp(36px, 4vw, 52px) 0;
+  padding-left: 26px;
+  border-left: 1px solid var(--gold);
+  font-family: var(--display);
+  font-size: clamp(21px, 2.1vw, 28px);
+  line-height: 1.4;
+  color: var(--aubergine);
+}
+
+.article-list {
+  margin: 0 0 26px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule-light);
+}
+
+.article-list li {
+  position: relative;
+  padding: 16px 0 16px 26px;
+  border-bottom: 1px solid var(--rule-light);
+  font-size: clamp(15px, 1.15vw, 16.5px);
+  line-height: 1.7;
+  color: var(--body-grey);
+  font-weight: 300;
+  text-wrap: pretty;
+}
+
+.article-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 27px;
+  width: 12px;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* --------------------------------------------------------------------------
    Hero scroll indicator — the only animation in the design.
    -------------------------------------------------------------------------- */
 

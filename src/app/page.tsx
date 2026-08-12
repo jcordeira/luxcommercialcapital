@@ -4,8 +4,42 @@ import {
   capitalSources,
   propertyTypeNames,
   selectedTransactions,
+  site,
   solutionsPreview,
 } from '@/data/site';
+
+/** Entity markup so search engines can attach the firm to its name and contacts. */
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FinancialService',
+  name: site.name,
+  url: site.url,
+  description:
+    'Commercial real estate capital advisory and debt placement. Transactions from $1MM with no stated maximum, nationwide.',
+  logo: `${site.url}/icon.svg`,
+  telephone: site.phone,
+  email: site.email,
+  areaServed: 'US',
+  address: { '@type': 'PostalAddress', addressLocality: 'New York', addressRegion: 'NY', addressCountry: 'US' },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    telephone: site.phone,
+    email: site.email,
+    areaServed: 'US',
+    availableLanguage: 'English',
+  },
+  knowsAbout: [
+    'Commercial real estate financing',
+    'Debt placement',
+    'Bridge loans',
+    'Construction financing',
+    'SBA 504 and 7(a) loans',
+    'Agency and multifamily lending',
+    'CMBS',
+    'Private credit',
+  ],
+};
 
 const creditCells = [
   { figure: '$1MM+', label: 'Minimum Financing' },
@@ -40,6 +74,11 @@ const approachColumns = [
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+
       {/* 1 — Hero */}
       <section
         className="on-aubergine"

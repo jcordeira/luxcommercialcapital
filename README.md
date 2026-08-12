@@ -148,24 +148,66 @@ Notes:
 
 ## Still to supply
 
-These are marked as placeholders in the design and remain placeholders in the build:
-
-- **Leadership** (`/about`) — names, titles, bios. Card shells are in
-  `src/app/about/page.tsx`; the section is tagged "Awaiting bios and credentials".
-- **Insights** (`/insights`) — three article slots, tagged "Article slots — copy to be supplied".
 - **Selected Transactions** (home, section 10) — the four amounts in
   `selectedTransactions` in `src/data/site.ts` are layout placeholders. When real closed deals
   replace them, **delete the "Layout placeholders" tag** in `src/app/page.tsx`.
-- **Privacy Policy and Terms of Use** — shells only, tagged "Awaiting copy from counsel". These
-  need real text from a lawyer; do not draft them yourself. Both are `noindex` until then.
+- **A licensing disclosure, if one is required.** The site makes no claim about licences or
+  registrations held by the firm, because inventing one would be worse than omitting it. If LUX
+  Commercial Capital holds a licence that has to be disclosed, add it to the footer and to the
+  Terms of Use.
+- **The formal legal entity name.** The legal pages refer to "LUX Commercial Capital" throughout.
+  If the operating entity is an LLC or corporation with a fuller registered name, substitute it.
+
+The Leadership section was removed from `/about` in August 2026. If bios are added later it should
+be rebuilt rather than restored from history, since the layout has changed around it.
+
+### The legal pages need a lawyer's eye
+
+`/privacy-policy` and `/terms-of-use` carry real, specific content written for this business: a
+debt placement firm that collects financial statements and uploaded documents, and that shares
+transactions with prospective lenders as the substance of its service. That last point is the one
+most template policies get wrong, and it is stated plainly.
+
+They have not been reviewed by counsel. Before relying on them, have a lawyer check at minimum:
+which privacy regimes apply given the mix of commercial and individual borrowers, whether the
+liability and indemnity clauses are enforceable as drafted in New York, and whether any
+disclosure is required for the firm's licensing status or its compensation arrangements.
 
 ## Content
 
 Copy lives in `src/data/site.ts` — phone, email, the 15 property types, the 15 products, the four
 approach steps. Editing it there updates every page that uses it.
 
-All copy is final and client-approved unless listed above. Note the em-dash-free, declarative
-voice; keep it if you add pages.
+All copy is final and client-approved unless listed above. Note the declarative, unhedged voice;
+keep it if you add pages.
+
+## Publishing an article
+
+Articles live in `src/content/insights/`, one file each, as typed data rather than markdown. The
+index page, the `/insights/[slug]` routes, the sitemap and the structured data all read from
+`src/content/insights/index.ts`.
+
+To add one: copy an existing article file, change the `slug`, `category`, `title`, `standfirst`,
+`published` date and `blocks`, then import it in `index.ts` and add it to the `articles` array.
+It appears everywhere automatically. Blocks can be `p`, `h2`, `list` or `quote`.
+
+Two rules worth keeping:
+
+- **Never change a `slug` after publication.** The URL is what search engines and inbound links
+  point at. If a slug must change, the old path needs a redirect in `netlify.toml`.
+- **The `standfirst` doubles as the meta description**, so keep it under about 155 characters and
+  make it read as a promise about what the piece answers.
+
+### On publishing cadence
+
+Volume is not the lever. Google's spam policies explicitly target scaled content produced mainly
+to rank, and a financial services site publishing bulk generated commentary is squarely in scope.
+Three genuinely useful pieces that answer questions a sponsor actually types into a search box
+will outperform thirty thin ones, and they will not put the domain at risk.
+
+The other reason to go slowly: articles about debt structures published under the firm's name read
+as professional opinion. Anything posted here should be reviewed by someone at the firm before it
+goes live, for accuracy and for liability. Draft, review, publish. Not publish, then check.
 
 ## Where the build departs from the prototype
 

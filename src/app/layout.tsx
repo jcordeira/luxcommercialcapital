@@ -27,6 +27,8 @@ export const metadata: Metadata = {
   },
   description:
     'Strategic debt placement for commercial real estate investors, owners and developers. Transactions from $1MM with no stated maximum, nationwide.',
+  // Resolved per route against metadataBase, so every page gets its own canonical.
+  alternates: { canonical: './' },
   openGraph: {
     type: 'website',
     siteName: site.name,
