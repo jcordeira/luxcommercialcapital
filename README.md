@@ -161,6 +161,38 @@ Notes:
 The Leadership section was removed from `/about` in August 2026. If bios are added later it should
 be rebuilt rather than restored from history, since the layout has changed around it.
 
+## A2P 10DLC / SMS compliance
+
+If the firm texts anyone from a registered Twilio number, carriers review this site
+before approving the campaign. What they check is in place as of 22 October 2026:
+
+- **`/privacy-policy`** carries the two clauses carrier reviewers look for, verbatim:
+  *"No mobile information will be shared with third parties or affiliates for marketing or
+  promotional purposes"* and the companion sentence excluding *"text messaging originator opt-in
+  data and consent"* from every sharing category. A generic privacy policy fails review without
+  these, which is why they are quoted rather than paraphrased. Do not reword them.
+- **`/terms-of-use`** has a Text messaging (SMS) terms section: programme description, consent,
+  frequency, cost, opt-out, delivery and a pointer back to the Privacy Policy.
+- **Both forms** carry an SMS consent checkbox (`src/components/SmsConsent.tsx`), on `/contact`
+  and `/submit-your-deal`.
+
+Three properties of that checkbox are compliance requirements, not styling choices:
+
+1. **Unchecked by default.** Carriers and the TCPA both reject pre-ticked consent.
+2. **Never required to submit.** It is deliberately absent from the `validate` function in each
+   form. If someone later makes it mandatory, the registration becomes non-compliant.
+3. **The disclosure text is submitted verbatim** in the `sms-consent-text` hidden field, which is
+   rendered only when the box is ticked. The wording someone agreed to is the evidence of consent;
+   a boolean on its own is not. The label and the submitted string are both derived from one
+   `DISCLOSURE` array, so they cannot drift apart — edit the wording there and both change
+   together.
+
+Netlify stamps every submission server-side, so there is deliberately no client timestamp: a
+browser clock is weaker evidence than the one that comes free.
+
+`/privacy` and `/terms` 301 to the full paths (see `netlify.toml`), so whichever URL form ends up
+on a compliance document resolves.
+
 ### The legal pages need a lawyer's eye
 
 `/privacy-policy` and `/terms-of-use` carry real, specific content written for this business: a

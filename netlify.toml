@@ -5,6 +5,26 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Short paths for the legal pages. A2P 10DLC reviewers and compliance forms are
+# handed whichever form someone happened to write down, so both resolve.
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy-policy/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms-of-use/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms-and-conditions"
+  to = "/terms-of-use/"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]

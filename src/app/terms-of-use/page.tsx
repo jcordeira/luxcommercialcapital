@@ -40,6 +40,19 @@ const sections: LegalSection[] = [
     ],
   },
   {
+    heading: 'Text messaging (SMS) terms',
+    body: [
+      'These terms apply if you consent to receive text messages from LUX Commercial Capital, and they form part of your agreement with the firm.',
+      'Programme: transaction-related messages from LUX Commercial Capital about a submission you made, including acknowledgements, requests for underwriting information, scheduling, and answers to your questions. It is one-to-one correspondence about your deal, not marketing broadcasts.',
+      'Consent: we text only people who have given express written consent by ticking the consent box on a form on this site. That box is never pre-ticked. Consent to receive text messages is not a condition of submitting a transaction, of obtaining financing, of approval, or of engaging the firm, and declining costs you nothing.',
+      'Frequency: message frequency varies with your activity and the stage of the transaction. There is no fixed number.',
+      'Cost: message and data rates may apply. Those charges are set by your mobile carrier and are your responsibility. We charge nothing for the messages.',
+      'Opting out: reply STOP to any message to cancel. You will receive one confirmation and no further messages unless you opt in again. Reply HELP to any message, or contact us using the details below, for assistance.',
+      'Delivery: carriers are not liable for delayed or undelivered messages, and we cannot guarantee delivery on every carrier or device.',
+      'Mobile information collected through the text messaging programme is handled as described in the Privacy Policy. It is never shared with third parties or affiliates for marketing or promotional purposes.',
+    ],
+  },
+  {
     heading: 'Fees',
     body: [
       'There is no charge for submitting a transaction or for an initial conversation.',
@@ -111,7 +124,7 @@ export default function TermsOfUsePage() {
       eyebrow="Legal"
       title="Terms of Use."
       lead="The terms that apply when you use this site or send us a transaction."
-      effective="11 August 2026"
+      effective="22 October 2026"
       sections={sections}
     />
   );

@@ -27,6 +27,7 @@ const sections: LegalSection[] = [
       'Property economics: net operating income, capitalisation rate, net profit and profit and loss information.',
       'Documents you upload, such as rent rolls, operating statements, offering memoranda and budgets.',
       'Anything else you write in the free-text fields.',
+      'Whether you consented to text messages, and the exact wording of the disclosure you agreed to, where you ticked that box.',
     ],
   },
   {
@@ -45,6 +46,27 @@ const sections: LegalSection[] = [
     ],
   },
   {
+    heading: 'Text messaging (SMS) and mobile information',
+    body: [
+      'Where you give us a mobile number and tick the SMS consent box on a form on this site, we may text you about your transaction. This section describes that programme and how the number is handled.',
+      'The important commitment first:',
+    ],
+    list: [
+      'No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.',
+      'All of the sharing categories described elsewhere in this policy exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.',
+      'Phone numbers and mobile information collected for text messaging are not sold, rented, released or traded to anyone for marketing or promotional purposes.',
+    ],
+  },
+  {
+    heading: 'How the texting programme works',
+    body: [
+      'We text only people who have given express written consent by ticking the consent box on a form on this site. The box is never pre-ticked, and ticking it is never a condition of submitting a transaction, of financing, or of any engagement with the firm. When you tick it we keep a record of the exact wording you agreed to.',
+      'Messages concern your transaction: acknowledging a submission, asking for the information needed to underwrite it, arranging a call, and answering your questions. Message frequency varies with the stage of the transaction. Message and data rates may apply, and those charges come from your mobile carrier, not from us.',
+      'You can stop the messages at any time by replying STOP to any text. We will send one confirmation and then nothing further unless you opt in again. Reply HELP to any message, or contact us at the details below, for assistance. Opting out of texts does not opt you out of email or telephone contact about a transaction you submitted, and it does not withdraw a transaction already with us.',
+      'Carriers are not liable for delayed or undelivered messages, and delivery is not guaranteed on every carrier or handset.',
+    ],
+  },
+  {
     heading: 'When we share it, and who with',
     body: [
       'Placing debt requires showing your transaction to people who might finance it. This is the most significant sharing we do, and it is the point of engaging the firm.',
@@ -60,7 +82,7 @@ const sections: LegalSection[] = [
   {
     heading: 'What we never do with it',
     body: [
-      'We do not sell your information. We do not rent it, trade it, or share it with data brokers or advertising networks.',
+      'We do not sell your information. We do not rent it, trade it, or share it with data brokers or advertising networks. No mobile information is shared with third parties or affiliates for marketing or promotional purposes.',
       'Where a transaction is confidential or you tell us it is sensitive, say so and we will agree how it is handled before it goes to market. If you want a non-disclosure agreement in place first, ask.',
     ],
   },
@@ -113,7 +135,7 @@ export default function PrivacyPolicyPage() {
       eyebrow="Legal"
       title="Privacy Policy."
       lead="What we collect, why we have it, and who sees it."
-      effective="11 August 2026"
+      effective="22 October 2026"
       sections={sections}
     />
   );

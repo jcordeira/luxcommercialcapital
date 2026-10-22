@@ -664,6 +664,54 @@ button {
   color: var(--gold);
 }
 
+/* --------------------------------------------------------------------------
+   SMS consent
+
+   Unchecked by default and never required. Carriers reject pre-checked or
+   mandatory consent, and so does the TCPA.
+   -------------------------------------------------------------------------- */
+
+.consent-panel {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  border: 1px solid var(--rule);
+  background: var(--off-white);
+  padding: 20px 22px;
+}
+
+.consent-box {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin: 2px 0 0;
+  accent-color: var(--aubergine);
+  cursor: pointer;
+}
+
+.consent-label {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--body-grey);
+  font-weight: 300;
+  cursor: pointer;
+  text-wrap: pretty;
+}
+
+.consent-label strong {
+  font-weight: 500;
+  color: var(--ink-text);
+}
+
+.consent-link {
+  color: var(--aubergine);
+  border-bottom: 1px solid var(--gold);
+}
+
+.consent-link:hover {
+  color: var(--gold);
+}
+
 /* Selectable chips — checkboxes wearing the design's bordered chip. */
 .chip {
   display: inline-flex;

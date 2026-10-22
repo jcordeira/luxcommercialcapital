@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { SelectField, TextField, TextareaField } from './Field';
+import { SmsConsent } from './SmsConsent';
 import { looksLikeEmail, useFormSubmit } from './useFormSubmit';
 import { propertyTypeOptions, transactionTypeOptions } from '@/data/site';
 
@@ -28,6 +29,7 @@ export function TransactionForm() {
   const fileInput = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<string[]>([]);
   const [fileError, setFileError] = useState<string | null>(null);
+  const [smsConsent, setSmsConsent] = useState(false);
 
   function onFilesChosen(event: React.ChangeEvent<HTMLInputElement>) {
     const chosen = Array.from(event.target.files ?? []);
@@ -207,6 +209,8 @@ export function TransactionForm() {
           </p>
         )}
       </div>
+
+      <SmsConsent checked={smsConsent} onChange={setSmsConsent} id="sms-consent-transaction" />
 
       <button type="submit" className="btn btn--aubergine btn--submit" disabled={status === 'sending'}>
         {status === 'sending' ? 'Sending' : 'Submit Transaction'}

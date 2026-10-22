@@ -1,6 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { SelectField, TextField, TextareaField } from './Field';
+import { SmsConsent } from './SmsConsent';
 import { looksLikeEmail, looksLikePhone, useFormSubmit } from './useFormSubmit';
 import { capitalNeedOptions, propertyTypeOptions } from '@/data/site';
 
@@ -21,6 +23,7 @@ function validate(data: FormData) {
 
 export function IntakeForm() {
   const { status, errors, handleSubmit } = useFormSubmit(validate);
+  const [smsConsent, setSmsConsent] = useState(false);
 
   return (
     <form
@@ -77,6 +80,8 @@ export function IntakeForm() {
         rows={3}
         placeholder="Timing, current debt, occupancy, business plan"
       />
+
+      <SmsConsent checked={smsConsent} onChange={setSmsConsent} id="sms-consent-intake" />
 
       <button
         type="submit"
